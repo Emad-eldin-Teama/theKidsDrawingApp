@@ -167,5 +167,15 @@
         android:contentDescription="Brush Img"
         android:layout_margin="5dp"
         />
+
+    <ImageButton
+        android:id="@+id/ib_save"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_save"
+        android:scaleType="fitXY"
+        android:contentDescription="Save Img"
+        android:layout_margin="5dp"
+        />
 </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
