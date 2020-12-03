@@ -10,6 +10,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.media.AsyncPlayer
 import android.media.Image
+import android.media.MediaScannerConnection
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -124,7 +125,7 @@ class MainActivity : AppCompatActivity() {
         if(grantResults.isNotEmpty() && grantResults[0] ==PackageManager.PERMISSION_GRANTED){
             Toast.makeText(this@MainActivity,"Permission granted now  you can read the storage",Toast.LENGTH_LONG).show()
         }else{
-            Toast.makeText(this@MainActivity,"Access Denied !!! Self Destruct sequence Activated",Toast.LENGTH_LONG).show()
+            Toast.makeText(this@MainActivity,"Access Denied !!!",Toast.LENGTH_LONG).show()
         }
     }
     private fun isReadStorageAllowed() :Boolean {
@@ -171,6 +172,15 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this@MainActivity,"file saved successfully : $result",Toast.LENGTH_LONG).show()}else{
                 Toast.makeText(this@MainActivity,"Something went wrong while saving! ",Toast.LENGTH_LONG).show()
             }
+
+            MediaScannerConnection.scanFile(this@MainActivity,arrayOf(result),null){
+                path, uri -> val shareIntent = Intent ()
+                shareIntent.action = Intent.ACTION_SEND
+                shareIntent.putExtra(Intent.EXTRA_STREAM,uri)
+                shareIntent.type = "image/png"
+                startActivity(Intent.createChooser(shareIntent,"Share"))
+            }
+
         }
 
     }

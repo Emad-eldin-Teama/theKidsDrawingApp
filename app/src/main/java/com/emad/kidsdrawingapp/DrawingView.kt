@@ -7,7 +7,6 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
-import java.util.jar.Attributes
 
 @SuppressLint("NewApi")
 class DrawingView(context: Context, attrs:AttributeSet): View(context,attrs) {
@@ -20,6 +19,7 @@ class DrawingView(context: Context, attrs:AttributeSet): View(context,attrs) {
     private var canvas: Canvas? = null
     private val mPaths = ArrayList<CustomPath>()
     private val mUndoPaths = ArrayList <CustomPath>()
+    private var erase = false
 
     init{
         setUpDrawing ()
@@ -102,6 +102,8 @@ class DrawingView(context: Context, attrs:AttributeSet): View(context,attrs) {
         mDrawPaint!!.color = color
 
     }
+   
+
 
     internal inner class CustomPath(var color:Int,
     var brushThickness:Float) : Path(){
